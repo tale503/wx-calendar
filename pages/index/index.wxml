@@ -1,0 +1,4 @@
+<!--index.wxml-->
+<view class="container">
+  <v-calendar name="calendar" bindmyevent="onCalendar" extraData="{{extraData}}"></v-calendar>
+</view>

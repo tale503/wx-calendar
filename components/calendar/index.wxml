@@ -1,0 +1,38 @@
+<view class="calendar-main">
+  <view>
+    <view class="flex year-month">
+      <view bindtap="prevMonth">上一月</view>
+      <view>
+        <picker mode="date" fields="month" bindchange="monthChange">
+          <text class="bold">{{time.year}} - {{time.month + 1}}</text>
+        </picker>
+      </view>
+      <view bindtap="nextMonth">下一月</view>
+    </view>
+    <view class="flex">
+      <view class="flex-item flex" wx:for="{{weeks}}" wx:key="index" >
+        <text class="week">{{item}}</text>
+      </view>
+    </view>
+    <view class="flex-wrap">
+      <block wx:for="{{visibleDaysArr}}" wx:key="index">
+        <view class="day-box flex-column">
+          <view
+            class="day {{item.isToday ? 'today': '' }} {{item.selected ? 'selected' : ''}} {{item.isCur ? '' : 'notCurrentMonth'}}"
+            data-date="{{item.date}}"
+            bindtap="clickDate"
+          >{{item.day}}</view>
+          <block wx:if="{{showText}}">
+            <view wx:if="{{item.isCur}}" class="day-text">
+              {{item.data.value || ''}}
+            </view>
+          </block>
+          <block wx:if="{{showDot}}">
+            <view wx:if="{{item.isCur && item.data.dot && item.data.active}}" class="day-dot"></view>
+            <view wx:if="{{item.isCur && item.data.dot && !item.data.active}}" class="day-dot dot-gray"></view>
+          </block>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
